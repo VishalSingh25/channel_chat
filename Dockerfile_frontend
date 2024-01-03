@@ -1,0 +1,6 @@
+# Hosting the build static files using nginx.
+ 
+FROM nginx:alpine
+ 
+# Copy the static build present in the build folder which will be created automatically after compiling 
+COPY ./static/build /usr/share/nginx/html

@@ -1,0 +1,27 @@
+# Dockerfile for backend
+
+FROM python:3.8.13-bullseye
+
+ENV PYTHONUNBUFFERED=1
+
+# We set a workdir to /backend
+WORKDIR /backend
+
+# We copy the requirements.txt file
+COPY requirements /backend/requirements
+
+# We install the python dependencies
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install -r /backend/requirements/dev.txt
+
+# We copy the rest of the code
+COPY . /backend
+
+RUN python3 manage.py migrate 
+# We expose port 8000
+EXPOSE 8000
+
+# We run the server
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+

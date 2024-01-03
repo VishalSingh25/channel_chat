@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=channel_chat
+      - POSTGRES_USER=channel_chat
+      - POSTGRES_PASSWORD=channel_chat
+    ports:
+      - 5432:5432
+  web-back:
+    image: backend:latest
+    ports: 
+      - 8000:8000
+    depends_on:
+      - db
+
